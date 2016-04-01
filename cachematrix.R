@@ -1,15 +1,43 @@
-## Put comments here that give an overall description of what your
-## functions do
+## R Programming Assignment 2: Lexical Scoping-
+## 40 character SHA-1 hash
+## https://github.com/amitshinde0511/ProgrammingAssignment2
 
-## Write a short comment describing this function
+## The makeCacheMatrix function creates a special matrix",
 
-makeCacheMatrix <- function(x = matrix()) {
 
+a <- makeCacheMatrix <- function(x = matrix()) {
+  m<-NULL
+  set<-function(y){
+    x<<-y
+    m<<-NULL
+  }
+  get<-function() x
+  setmatrix<-function(inverse) m<<- inverse
+  getmatrix<-function() m
+  list(set=set, 
+       get=get,
+       setinverse = setinverse,
+       getinverse = getinverse)
 }
 
 
-## Write a short comment describing this function
+## The cacheSolve function calculates inverse of the special "matrix"
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+b <- cacheSolve <- function(x, ...) {
+  ## Return a matrix that is the inverse of 'x'
+  m<-x$getmatrix()
+  if(!is.null(m)){
+    message("getting cached data")
+    return(m)
+  }
+  matrix<-x$get()
+  m<-solve(matrix, ...)
+  x$setmatrix(m)
+  m
 }
+
+#### Testing matrix below 
+ m = matrix(c(22,44,33,11), nrow=2, ncol=2)
+ m
+ solve(m)
+
